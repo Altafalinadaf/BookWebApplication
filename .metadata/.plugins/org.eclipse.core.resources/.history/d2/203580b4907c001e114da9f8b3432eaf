@@ -1,0 +1,52 @@
+package org.jsp.bookWebApp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/editScreen")
+public class EditList extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int id=Integer.parseInt(req.getParameter("id"));
+		String Qry="
+		
+		PrintWriter out=resp.getWriter();
+	
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bookdata","root","admin");
+			ps=con.prepareStatement(" ");
+			ResultSet rs=ps.executeQuery("select bname,bedit,bprice from book where bId=\"+id);
+
+			out.print("<table align='center'>");
+			out.print("<tr>");
+			out.print("<th>BookId</th>");
+			out.print("<th>BookName</th>");
+			out.print("<th>BookEdition</th>");
+			out.print("<th>BookPrice</th>");
+			out.print("<th>Edit</th>");
+			out.print("<th>Delete</th>");
+			out.print("</tr>");
+			
+			
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+}

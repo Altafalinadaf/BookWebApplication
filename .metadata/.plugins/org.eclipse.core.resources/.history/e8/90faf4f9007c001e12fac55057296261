@@ -1,0 +1,58 @@
+package org.jsp.bookWebApp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/register")
+
+public class RegisterBook extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String bookname=req.getParameter("bname");
+		String bookedit=req.getParameter("bedit");
+		String bookprice=req.getParameter("bprice");
+		
+		PrintWriter out=resp.getWriter();
+//		out.print(bookname);
+//		out.print(bookedit);
+//		out.print(bookprice);
+		PreparedStatement ps=null;
+		Connection con=null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bookdata","root","admin");
+			ps=con.prepareStatement("insert into book values(?,?,?)");
+			ps.setString(1, bookname);
+			ps.setString(2,bookedit);
+			ps.setFloat(3, bookprice);
+			
+			int count=ps.executeUpdate();
+			if(count>0) {
+				out.println("register successfully");
+			}
+			else {
+				out.printf("not register successfully");
+			}
+		}
+		catch (SQLException |ClassNotFoundException e) {
+			e.printStackTrace();
+			out.print("exception occure "+e.getMessage());
+		}
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+}

@@ -1,0 +1,21 @@
+package org.jsp.bookWebApp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/editScreen")
+public class EditList extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String Qry="select bname,bedit,bprice where id="+req.getParameter("bId");
+		int id=Integer.parseInt(req.getParameter("id"));
+		PrintWriter out=resp.getWriter();
+	}
+
+}

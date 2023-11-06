@@ -1,0 +1,71 @@
+package org.jsp.bookWebApp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/register")
+
+public class RegisterBook extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String bookname=req.getParameter("bname");
+		String bookedit=req.getParameter("bedit");
+		float bookprice=Float.parseFloat(req.getParameter("bprice"));
+		
+		PrintWriter out=resp.getWriter();
+
+		PreparedStatement ps=null;
+		Connection con=null;
+		
+		resp.setContentType("text/html");
+		
+		try {
+			// loading and registering the driver class
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			// connecting with the database
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bookdata","root","admin");
+			
+			// prepared SQL statement or platform
+			ps=con.prepareStatement("insert into book(bname,bedit,bprice)values(?,?,?)");
+			
+			// setting all the values to the table 
+			ps.setString(1, bookname);
+			ps.setString(2,bookedit);
+			ps.setFloat(3, bookprice);
+			
+			
+			// executing the query return type is Int (counts how many rows are effected )
+			int count=ps.executeUpdate();
+			if(count>0) {
+				out.println("<h1 style='color:green'>Register Successfully</h1>");
+			}
+			else {
+				out.printf("<h2 style=color:'red'>Not Register Successfully</h2>");
+			}
+			
+			
+			out.println("<a href='list'>BookList</a>   "); // out.print("<a href=\"list\">BookList</a>"); both are same
+			out.println("<a href='register'>Home</a>");
+		}
+		catch (SQLException |ClassNotFoundException e) {
+			e.printStackTrace();
+			out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
+		}
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+}
