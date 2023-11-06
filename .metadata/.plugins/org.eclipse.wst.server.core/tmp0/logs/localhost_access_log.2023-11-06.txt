@@ -362,3 +362,11 @@
 0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:52:04 +0530] "GET /bookWebApp/editScreen?id=2 HTTP/1.1" 200 464
 0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:52:14 +0530] "POST /bookWebApp/editUrl?id=2 HTTP/1.1" 200 7
 0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:53:41 +0530] "GET /bookWebApp/list HTTP/1.1" 200 4969
+127.0.0.1 - - [06/Nov/2023:22:55:07 +0530] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:55:08 +0530] "GET /bookWebApp/editUrl HTTP/1.1" 500 1285
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:57:29 +0530] "GET /bookWebApp/editUrl HTTP/1.1" 500 1285
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:57:47 +0530] "GET /bookWebApp/home.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:57:47 +0530] "GET /favicon.ico HTTP/1.1" 404 763
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:57:50 +0530] "GET /bookWebApp/list HTTP/1.1" 200 4969
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:57:59 +0530] "GET /bookWebApp/editScreen?id=7 HTTP/1.1" 200 464
+0:0:0:0:0:0:0:1 - - [06/Nov/2023:22:58:04 +0530] "POST /bookWebApp/editUrl?id=7 HTTP/1.1" 200 57
