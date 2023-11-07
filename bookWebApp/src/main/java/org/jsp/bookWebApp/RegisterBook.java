@@ -63,6 +63,18 @@ public class RegisterBook extends HttpServlet{
 			e.printStackTrace();
 			out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
 		}
+		finally {
+			try {
+				if (con!=null && ps!=null && out!=null ) {
+					con.close();
+					ps.close();
+					out.close();	
+				}
+			}
+			catch (Exception e) {
+				out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
+			}
+		}
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

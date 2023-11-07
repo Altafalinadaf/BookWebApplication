@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;org.jsp.bookWebApp.delete.ReviewDelData&apos; to &apos;Deldata&apos;&#x0D;&#x0A;- Original project: &apos;bookWebApp&apos;&#x0D;&#x0A;- Original element: &apos;org.jsp.bookWebApp.delete.ReviewDelData&apos;&#x0D;&#x0A;- Renamed element: &apos;org.jsp.bookWebApp.delete.Deldata&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ReviewDelData&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;org.jsp.bookWebApp.delete{ReviewDelData.java[ReviewDelData" matchStrategy="1" name="Deldata" qualified="false" references="true" similarDeclarations="false" stamp="1699348382194" textual="false" version="1.0"/>
+</session>

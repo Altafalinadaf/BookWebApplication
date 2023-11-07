@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,7 +21,6 @@ public class EditData extends HttpServlet {
 		//String qry="update book set bname=?,bedit=?,bprice=? where bId=?";
 		
 		int id = Integer.parseInt(req.getParameter("id"));
-		System.out.println("id getting");
 		String bname=req.getParameter("BookName");
 		String bedit=req.getParameter("BookEdition");
 		float bprice=Float.parseFloat(req.getParameter("BookPrice"));
@@ -40,18 +40,39 @@ public class EditData extends HttpServlet {
 			ps.setFloat(3, bprice);
 			ps.setInt(4, id);
 			int r=ps.executeUpdate();
-			System.out.println("executed");
+			RequestDispatcher rd=null;
+			resp.setContentType("text/html");
+
 			
 			if(r>0) {
-				out.print("<h1 style='color:green'>Value successfully modified </h1>");
+				
+				out.print("<h1 style='color:green'>Value Successfully modified </h1>");
+				rd=req.getRequestDispatcher("list");
+				rd.include(req, resp);
 			}
 			else {
-				out.print("not updated");
+				
+				out.print("<h1 style='color:red'>not updated </h1>");
+				rd=req.getRequestDispatcher("list");
+				rd.include(req, resp);
 			}
 		}
 		catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
+		}
+		finally {
+			try {
+				if (con!=null && ps!=null && out!=null ) {
+					con.close();
+					ps.close();
+					out.close();	
+				}
+			}
+			catch (Exception e) {
+				out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
+			}
 		}
 	}
 	

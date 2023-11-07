@@ -32,7 +32,8 @@ public class BookList extends HttpServlet{
 			ps=con.prepareStatement("select * from book");
 			
 			ResultSet rs=ps.executeQuery();
-			out.print("<h1 style='color:red' align='center'> List of Books </h1>");
+		
+			out.print("<h1  align='center'> List of Books </h1>");
 			out.print("<table border='1' align='center'>");
 			out.print("<tr>");
 			out.print("<th>BookId</th>");
@@ -53,12 +54,28 @@ public class BookList extends HttpServlet{
 				out.println("<td><a href='deleteScreen?id="+rs.getInt(1)+"'>delete</a></td>");
 				out.println("</tr");
 			}
+			out.print("<tr>");
+			out.print("<td><a href='home.html'>Home</a></td>");
+			out.print("<td><a href='list'>refres</a></td>");
+			out.print("</tr>");
 			out.print("</table>");
 	
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 			out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
+		}
+		finally {
+			try {
+				if (con!=null && ps!=null && out!=null ) {
+					con.close();
+					ps.close();
+					out.close();	
+				}
+			}
+			catch (Exception e) {
+				out.print("<h2 style='color:red'>exception occure "+e.getMessage()+"</h2>");
+			}
 		}
 	}
 	@Override
